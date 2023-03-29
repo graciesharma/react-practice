@@ -2,13 +2,18 @@ import React, { FormEvent, useRef } from "react";
 
 const Form = () => {
 
-const nameRef= useRef(null);
+const nameRef= useRef<HTMLInputElement>(null);
+const ageRef = useRef<HTMLInputElement>(null);
+const person = {name:'', age:0  }
 
 
   const handleSubmit = (event:FormEvent) =>{
     event.preventDefault();
-    console.log(nameRef.current)
-
+    if(nameRef.current !== null)
+    person.name =nameRef.current.value
+    if(ageRef.current !== null)
+    person.age =parseInt (ageRef.current.value);
+    console.log(person)
   }
 
   return (
@@ -21,7 +26,7 @@ const nameRef= useRef(null);
       </div>
       <div className="mb-3">
         <label htmlFor="age" className="form-label">Age</label>
-        <input id="age" type="number" className="form-control" />
+        <input ref={ageRef} type="number" className="form-control" />
       </div>
 <button className="btn btn-primary" type='submit'>Submit</button>
  </form>
